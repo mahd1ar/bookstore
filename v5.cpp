@@ -107,7 +107,7 @@ void readData()
                 {
                     for (int j = 0; j < books.size(); j++)
                     {
-                        if (books[j].title == row[i])
+                        if (books[j].id == row[i])
                         {
                             user.borrowedBooks.push_back(books[j]);
                             break;
@@ -364,6 +364,6 @@ int main()
             }
         }
     }
-    cout << "see you sooon :)";
+    cout << "see you sooon :) \n";
     return 0;
 }
