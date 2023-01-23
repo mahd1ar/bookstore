@@ -27,14 +27,6 @@ struct User
 vector<User> users;
 vector<Book> books;
 
-int generateRandomInt(int min, int max)
-{
-    std::random_device rd;  // Will be used to obtain a seed for the random number engine
-    std::mt19937 gen(rd()); // Standard mersenne_twister_engine seeded with rd()
-    std::uniform_int_distribution<> dis(min, max);
-    return dis(gen);
-}
-
 string generateRandomString(size_t size)
 {
     string result;
@@ -63,7 +55,7 @@ void saveData()
         dataFile << users[i].id << "," << users[i].firstName << "," << users[i].lastName << "," << users[i].isAdmin << "," << users[i].password << ",";
 
         // debug
-        std::cout << users[i].firstName << " String address = " << static_cast<void *>(&users[i].borrowedBooks) << std::endl;
+        // std::cout << users[i].firstName << " String address = " << static_cast<void *>(&users[i].borrowedBooks) << std::endl;
 
         for (int j = 0; j < users[i].borrowedBooks.size(); j++)
         {
@@ -201,12 +193,12 @@ User &login(string username, string password)
     {
         if (users[i].firstName + " " + users[i].lastName == username && users[i].password == password)
         {
-            std::cout << "String address = " << static_cast<void *>(&users[i]) << std::endl;
+            // debug
+            // std::cout << "String address = " << static_cast<void *>(&users[i]) << std::endl;
             return users[i];
         }
     }
-    User emptyUser = {-1, "", "", "", {}, false};
-    return emptyUser;
+    throw runtime_error("Username or password is not valid!");
 }
 
 void addBook(string title, string author)
@@ -259,7 +251,7 @@ vector<Book> searchBooks(string title)
 int main()
 {
 
-    fstream dataFile("data.txt");
+    fstream dataFile("data.csv");
 
     if (!dataFile.good())
     {
