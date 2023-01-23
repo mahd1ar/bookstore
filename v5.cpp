@@ -270,13 +270,8 @@ int main()
     string password;
     cout << "Enter password: ";
     getline(cin, password);
-    User currentUser = login(username, password);
+    User &currentUser = login(username, password);
 
-    if (currentUser.id == -1)
-    {
-        cout << "Invalid username or password." << endl;
-        return 0;
-    }
     while (true)
     {
 
